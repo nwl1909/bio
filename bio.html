@@ -1,0 +1,277 @@
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bio</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter,sans-serif;
+}
+
+body{
+    background:#050505;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* Background */
+
+.background{
+    position:fixed;
+    inset:0;
+    background:
+    radial-gradient(circle at 20% 20%,#00f5ff33,transparent),
+    radial-gradient(circle at 80% 40%,#7b2cff55,transparent),
+    radial-gradient(circle at 50% 80%,#ff00ff33,transparent),
+    #050505;
+    animation:move 10s infinite alternate;
+    z-index:-1;
+}
+
+@keyframes move{
+    from{transform:scale(1);}
+    to{transform:scale(1.2);}
+}
+
+/* ENTER SCREEN */
+
+.enter{
+    position:fixed;
+    inset:0;
+    backdrop-filter:blur(25px);
+    background:rgba(0,0,0,.6);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:1000;
+    cursor:pointer;
+    transition:1.2s;
+}
+
+.enter h1{
+    font-size:60px;
+    letter-spacing:8px;
+    text-shadow:0 0 20px cyan;
+    animation:pulse 2s infinite;
+}
+
+.enter span{
+    margin-top:10px;
+    opacity:.7;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.08);}
+    100%{transform:scale(1);}
+}
+
+/* MAIN */
+
+.main{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    transition:1.5s;
+}
+
+.profile{
+    margin-top:120px;
+    padding:35px;
+    width:420px;
+
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+
+    backdrop-filter:blur(20px);
+
+    border-radius:25px;
+
+    text-align:center;
+
+    box-shadow:
+    0 0 40px rgba(0,245,255,.2);
+}
+
+.profile h2{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.profile p{
+    opacity:.8;
+}
+
+/* ACHIEVEMENTS */
+
+.cards{
+    display:flex;
+    gap:30px;
+    margin-top:80px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.card{
+    width:250px;
+    height:180px;
+
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+
+    backdrop-filter:blur(20px);
+
+    border-radius:20px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    transform:translateY(50px);
+    opacity:0;
+
+    animation:show .8s forwards;
+
+    box-shadow:0 0 25px rgba(255,255,255,.05);
+}
+
+.card:nth-child(2){
+    animation-delay:.3s;
+}
+
+.card:nth-child(3){
+    animation-delay:.6s;
+}
+
+@keyframes show{
+    to{
+        transform:translateY(0);
+        opacity:1;
+    }
+}
+
+.icon{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.counter{
+    font-size:40px;
+    font-weight:700;
+    color:#00f5ff;
+}
+
+.title{
+    opacity:.7;
+}
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="enter" id="enter">
+    <h1>CLICK</h1>
+    <span>to enter</span>
+</div>
+
+<div class="main" id="main">
+
+    <div class="profile">
+        <h2>YOUR NAME</h2>
+        <p>Developer • Designer • Entrepreneur</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="icon">🚀</div>
+            <div class="counter" data-target="27">0</div>
+            <div class="title">Projects</div>
+        </div>
+
+        <div class="card">
+            <div class="icon">💰</div>
+            <div class="counter" data-target="150">0</div>
+            <div class="title">Clients</div>
+        </div>
+
+        <div class="card">
+            <div class="icon">🏆</div>
+            <div class="counter" data-target="12">0</div>
+            <div class="title">Awards</div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const enter = document.getElementById("enter");
+const main = document.getElementById("main");
+const music = document.getElementById("music");
+
+enter.addEventListener("click",()=>{
+
+    music.play();
+
+    enter.style.opacity="0";
+    enter.style.pointerEvents="none";
+
+    setTimeout(()=>{
+        main.style.opacity="1";
+    },500);
+
+    startCounters();
+
+});
+
+function startCounters(){
+
+    document.querySelectorAll(".counter").forEach(counter=>{
+
+        let target = +counter.dataset.target;
+        let count = 0;
+
+        let update = ()=>{
+
+            count += Math.ceil(target/80);
+
+            if(count >= target){
+                counter.innerText = target;
+                return;
+            }
+
+            counter.innerText = count;
+
+            requestAnimationFrame(update);
+        }
+
+        update();
+    });
+
+}
+
+</script>
+
+</body>
+</html>
+```
