@@ -4,269 +4,223 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Bio</title>
+<title>Для Андрея ❤️</title>
 
 <style>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Inter,sans-serif;
 }
 
 body{
-    background:#050505;
-    color:white;
-    overflow-x:hidden;
+    overflow:hidden;
+    background:#0f0f0f;
+    font-family:Arial,sans-serif;
+    height:100vh;
 }
 
-/* Background */
+/* Фон */
 
 .background{
     position:fixed;
     inset:0;
     background:
-    radial-gradient(circle at 20% 20%,#00f5ff33,transparent),
-    radial-gradient(circle at 80% 40%,#7b2cff55,transparent),
-    radial-gradient(circle at 50% 80%,#ff00ff33,transparent),
-    #050505;
-    animation:move 10s infinite alternate;
-    z-index:-1;
+    radial-gradient(circle at 20% 20%, rgba(255,0,100,.35), transparent 30%),
+    radial-gradient(circle at 80% 30%, rgba(255,50,150,.3), transparent 30%),
+    radial-gradient(circle at 50% 90%, rgba(255,0,200,.2), transparent 40%),
+    #090909;
+    animation:bgMove 12s infinite alternate ease-in-out;
 }
 
-@keyframes move{
+@keyframes bgMove{
     from{transform:scale(1);}
-    to{transform:scale(1.2);}
+    to{transform:scale(1.15);}
 }
 
-/* ENTER SCREEN */
+/* Экран входа */
 
 .enter{
     position:fixed;
     inset:0;
-    backdrop-filter:blur(25px);
-    background:rgba(0,0,0,.6);
     display:flex;
     justify-content:center;
     align-items:center;
-    flex-direction:column;
-    z-index:1000;
+    backdrop-filter:blur(20px);
+    background:rgba(0,0,0,.45);
+    z-index:100;
     cursor:pointer;
-    transition:1.2s;
+    transition:1s;
 }
 
-.enter h1{
-    font-size:60px;
-    letter-spacing:8px;
-    text-shadow:0 0 20px cyan;
-    animation:pulse 2s infinite;
+.enter button{
+    border:none;
+    padding:20px 50px;
+    border-radius:50px;
+    font-size:22px;
+    color:white;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    box-shadow:0 0 30px rgba(255,0,120,.4);
+    cursor:pointer;
+    transition:.3s;
 }
 
-.enter span{
-    margin-top:10px;
-    opacity:.7;
+.enter button:hover{
+    transform:scale(1.08);
 }
 
-@keyframes pulse{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.08);}
-    100%{transform:scale(1);}
-}
+/* Контент */
 
-/* MAIN */
-
-.main{
-    min-height:100vh;
+.content{
+    position:absolute;
+    inset:0;
     display:flex;
-    flex-direction:column;
     justify-content:center;
     align-items:center;
-    opacity:0;
-    transition:1.5s;
-}
-
-.profile{
-    margin-top:120px;
-    padding:35px;
-    width:420px;
-
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.1);
-
-    backdrop-filter:blur(20px);
-
-    border-radius:25px;
-
-    text-align:center;
-
-    box-shadow:
-    0 0 40px rgba(0,245,255,.2);
-}
-
-.profile h2{
-    font-size:42px;
-    margin-bottom:10px;
-}
-
-.profile p{
-    opacity:.8;
-}
-
-/* ACHIEVEMENTS */
-
-.cards{
-    display:flex;
-    gap:30px;
-    margin-top:80px;
-    flex-wrap:wrap;
-    justify-content:center;
-}
-
-.card{
-    width:250px;
-    height:180px;
-
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.1);
-
-    backdrop-filter:blur(20px);
-
-    border-radius:20px;
-
-    display:flex;
     flex-direction:column;
-    justify-content:center;
-    align-items:center;
-
-    transform:translateY(50px);
     opacity:0;
-
-    animation:show .8s forwards;
-
-    box-shadow:0 0 25px rgba(255,255,255,.05);
-}
-
-.card:nth-child(2){
-    animation-delay:.3s;
-}
-
-.card:nth-child(3){
-    animation-delay:.6s;
-}
-
-@keyframes show{
-    to{
-        transform:translateY(0);
-        opacity:1;
-    }
-}
-
-.icon{
-    font-size:40px;
-    margin-bottom:10px;
-}
-
-.counter{
-    font-size:40px;
-    font-weight:700;
-    color:#00f5ff;
+    transition:2s;
 }
 
 .title{
-    opacity:.7;
+    font-size:clamp(40px,8vw,90px);
+    text-align:center;
+    color:white;
+    text-shadow:
+    0 0 20px #ff4da6,
+    0 0 40px #ff4da6;
+    animation:float 4s ease-in-out infinite;
+}
+
+.subtitle{
+    margin-top:20px;
+    color:#ffd1e6;
+    font-size:22px;
+    opacity:.9;
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-15px);
+    }
+}
+
+/* Сердечки */
+
+.heart{
+    position:absolute;
+    color:#ff4da6;
+    font-size:20px;
+    pointer-events:none;
+    animation:rise linear forwards;
+}
+
+@keyframes rise{
+    from{
+        transform:translateY(0) scale(0.5);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-120vh) scale(1.8);
+        opacity:0;
+    }
+}
+
+/* Светящиеся круги */
+
+.glow{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(80px);
+    opacity:.35;
+}
+
+.g1{
+    width:300px;
+    height:300px;
+    background:#ff0077;
+    left:10%;
+    top:20%;
+}
+
+.g2{
+    width:250px;
+    height:250px;
+    background:#ff4da6;
+    right:15%;
+    bottom:15%;
 }
 </style>
 </head>
-
 <body>
 
 <div class="background"></div>
 
-<audio id="music" loop>
-    <source src="music.mp3" type="audio/mpeg">
-</audio>
+<div class="glow g1"></div>
+<div class="glow g2"></div>
 
 <div class="enter" id="enter">
-    <h1>CLICK</h1>
-    <span>to enter</span>
+    <button>Нажми ❤️</button>
 </div>
 
-<div class="main" id="main">
-
-    <div class="profile">
-        <h2>YOUR NAME</h2>
-        <p>Developer • Designer • Entrepreneur</p>
+<div class="content" id="content">
+    <div class="title">
+        Я люблю тебя,<br>
+        Андрей ❤️
     </div>
 
-    <div class="cards">
-
-        <div class="card">
-            <div class="icon">🚀</div>
-            <div class="counter" data-target="27">0</div>
-            <div class="title">Projects</div>
-        </div>
-
-        <div class="card">
-            <div class="icon">💰</div>
-            <div class="counter" data-target="150">0</div>
-            <div class="title">Clients</div>
-        </div>
-
-        <div class="card">
-            <div class="icon">🏆</div>
-            <div class="counter" data-target="12">0</div>
-            <div class="title">Awards</div>
-        </div>
-
+    <div class="subtitle">
+        Ты самый важный человек ✨
     </div>
-
 </div>
 
 <script>
 
 const enter = document.getElementById("enter");
-const main = document.getElementById("main");
-const music = document.getElementById("music");
+const content = document.getElementById("content");
 
 enter.addEventListener("click",()=>{
 
-    music.play();
-
     enter.style.opacity="0";
-    enter.style.pointerEvents="none";
 
     setTimeout(()=>{
-        main.style.opacity="1";
-    },500);
+        enter.style.display="none";
+        content.style.opacity="1";
+    },1000);
 
-    startCounters();
+    createHearts();
 
 });
 
-function startCounters(){
+function createHearts(){
 
-    document.querySelectorAll(".counter").forEach(counter=>{
+    setInterval(()=>{
 
-        let target = +counter.dataset.target;
-        let count = 0;
+        const heart = document.createElement("div");
 
-        let update = ()=>{
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
 
-            count += Math.ceil(target/80);
+        heart.style.left = Math.random()*100+"vw";
+        heart.style.bottom = "-30px";
 
-            if(count >= target){
-                counter.innerText = target;
-                return;
-            }
+        heart.style.fontSize =
+        (15 + Math.random()*40)+"px";
 
-            counter.innerText = count;
+        heart.style.animationDuration =
+        (4 + Math.random()*4)+"s";
 
-            requestAnimationFrame(update);
-        }
+        document.body.appendChild(heart);
 
-        update();
-    });
+        setTimeout(()=>{
+            heart.remove();
+        },8000);
+
+    },150);
 
 }
 
